@@ -1,0 +1,55 @@
+/* General */
+
+* {
+    padding: 0;
+    margin: 0
+}
+
+/* GameBoard */
+
+.game-board {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+/* Info Box */
+
+.info {
+    background-color: aqua;
+    display: block;
+    height: 100%;
+    padding-bottom: 100px;
+    margin-right: 15px;
+}
+
+.info h1 {
+    text-align: center;
+}
+
+.info p {
+    padding-top: 30px;
+}
+
+/* Score Box */
+
+.score {
+    background-color: aqua;
+    display: block;
+    margin-bottom: 600px;
+    margin-left: 15px;
+    padding-bottom: 150px;
+    padding-left: 75px;
+    padding-right: 75px;
+    height: 100%;
+}
+
+/* Canvas */
+
+/* canvas {
+    background-color: blue;
+} */
+
+
+
+
