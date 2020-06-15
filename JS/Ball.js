@@ -5,27 +5,22 @@ class Ball {
         this.ball = undefined
 
         this.ballSize = { w: 50, h: 35 }
-        this.ballPos = { x: 0, y: 10 }
-        this.ballVel = { x: 10, y: 10}
+        this.ballPos = { x: 600, y: 10 }
+        this.ballVel = { x: 2, y: 5}
 
         this.ball = new Image()
         this.ball.src = "./img/marble.png"
         // this.ballPhysics = { gravity: .4 }
     }
 
-    // draw() {
-    //     this.ctx.drawImage(this.ball, this.ballPos.x, this.ballPos.y, this.ballSize.w, this.ballSize.h)
-    // this.ball.onload = () => this.ctx.drawImage(this.ball, this.ballPos.x, this.ballPos.y, this.ballSize.w, this.ballSize.h)
-    //  }
-
     createBall() {
-        // this.move()
         this.ctx.drawImage(this.ball, this.ballPos.x, this.ballPos.y, this.ballSize.w, this.ballSize.h)
     }
 
     move() {
         this.ballPos.y += this.ballVel.y
         this.ballPos.x += this.ballVel.x
+        // this.ballVel.y += this.ballPhysics.gravity
 
     
         // console.log(this.canvasSize.h)

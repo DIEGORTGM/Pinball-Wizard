@@ -1,35 +1,41 @@
 class Paddle {
-    constructor(ctx, name, posX, posY, paddleW, paddleH, paddleVel, canvasSize) {
+    constructor(ctx, name, posX, posY, paddleW, paddleH, canvasSize) {
         this.ctx = ctx
-        this.name = name
         this.posX = posX
         this.posY = posY
         this.paddleW = paddleW
         this.paddleH = paddleH
-        this.paddleVel = 10
+        this.paddleVel = { x: 40, y: 10}
         this.canvasSize = canvasSize
         this.paddle = undefined
+
+        this.paddle = new Image()
+        this.paddle.src = name
     }
 
-    init() {
-        this.paddle = new Image()
-        this.paddle.src = "/img/BluePaddle.png"
-        this.paddle.onload = () => this.ctx.drawImage(this.paddle, this.posX, this.posY, this.paddleW, this.paddleH)
-    }
 
 
     createPaddle() {
         this.ctx.drawImage(this.paddle, this.posX, this.posY, this.paddleW, this.paddleH)
     }
-
+    
     move(dir) {
-        // this.paddlePos.x += this.paddleVel.x
-        // dir === 'left' && this.posX >= 275 ? this.posX -= this.paddleVel : null
-        // dir === 'right' && this.posX <= this.canvasSize.w - this.paddleW - 275 ? this.posX += this.paddleVel : null
-        dir === 'left' ? this.posX -= this.paddleVel : null
+  
+        if (dir === "left") {
+            this.posX--
+            this.createPaddle
+        }
+        
+        if (dir === "right") {
+            this.posX++
+            this.createPaddle
+        }
+        
     }
-
 }
+
+
+
 
 // move(dir) {
 //         if(dir === "left"){
@@ -77,9 +83,6 @@ class Paddle {
 // }
 
    
-
-
-
 
 
 
