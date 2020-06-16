@@ -6,12 +6,12 @@ class Ball {
 
         this.ballSize = { w: 40, h: 40 }
         this.ballPos = { x: 600, y: 10}
-        this.ballVel = { x: 2, y: 5}
+        this.ballVel = { x: 10, y: 10}
         this.radius = this.ballSize.w / 2
         // this.dx = 3
         // this.dy = -3
         this.ball = new Image()
-        this.ball.src = "./img/marble.png"
+        this.ball.src = "./img/pinballBueno.png"
         // this.ballPhysics = { gravity: .4 }
     }
 
