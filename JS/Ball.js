@@ -5,10 +5,11 @@ class Ball {
         this.ball = undefined
 
         this.ballSize = { w: 40, h: 40 }
-        this.ballPos = { x: 600, y: 10 }
+        this.ballPos = { x: 600, y: 10}
         this.ballVel = { x: 2, y: 5}
         this.radius = this.ballSize.w / 2
-
+        // this.dx = 3
+        // this.dy = -3
         this.ball = new Image()
         this.ball.src = "./img/marble.png"
         // this.ballPhysics = { gravity: .4 }
@@ -21,6 +22,9 @@ class Ball {
     move() {
         this.ballPos.y += this.ballVel.y
         this.ballPos.x += this.ballVel.x
+
+        // this.ballPos.y += this.dy
+        // this.ballPos.x += this.dx
         // this.ballVel.y += this.ballPhysics.gravity
 
     

@@ -62,34 +62,39 @@ const Game = {
         }
     },
     
-    paddleObstacle() {
-        // (this.ball.ballPos.x > (this.paddle.posX - this.ball.radius - this.paddle.paddleW / 2)) &&
-        // (this.ball.ballPos.x < (this.paddle.posX + this.ball.radius + this.paddle.paddleW / 2)) &&
-        // (this.ball.ballPos.y < this.paddle.posY) &&
-        // (this.ball.ballPosy > (this.paddle.posY - this.ball.radius - this.paddle.paddleH / 2)) 
-        // //alert('yay')
-
-       // if (this.ball.ballPos.x < this.paddle.posX + this.paddle.paddleW) {
-        //&& 
-            // this.ball.ballPos.x > this.paddle.posX &&
-            // this.paddle.posY < this.paddle.posY + this.paddle.paddleH &&
-            // this.ball.ballPos.y > this.paddle.posY) {
-               // this.ball.ballPos.x = this.ball.ballVel.x --
-                //this.ball.ballPos.y = this.ball.ballVel.y --
-           // console.log("ya") }
-        
-        
-            //let collidePoint = this.ball.ballPos.x - (this.ball.ballPos.x + this.paddle.paddleW / 2);
-             
-    },
-    
-
     wallObstacle() {
         this.ball.ballPos.y > this.canvasSize.h - this.ball.ballSize.h ? this.ball.ballVel.y *= -1 : null
         this.ball.ballPos.x > this.canvasSize.w - this.ball.ballSize.w ? this.ball.ballVel.x *= -1 : null
-        this.ball.ballPos.x - this.ball.ballSize.w <= 0 ? this.ball.ballVel.x ++: null
-        this.ball.ballPos.y - this.ball.ballSize.h <= this.canvasSize.h ? this.ball.ballVel.y ++ : null 
+        this.ball.ballPos.x < this.ball.ballSize.w  ? this.ball.ballVel.x ++ : null
+        this.ball.ballPos.y + this.ball.ballSize.h <= this.canvasSize.h ? this.ball.ballVel.y++ : null
     },
+    
+            
+    paddleObstacle() {
+
+       if (this.ball.ballPos.x < this.paddle.posX + this.paddle.paddleW && 
+            this.ball.ballPos.x > this.paddle.posX &&
+            this.paddle.posY < this.paddle.posY + this.paddle.paddleH &&
+            this.ball.ballPos.y > this.paddle.posY) {
+                this.ball.ballPos.x += this.ball.ballVel.x -= 2
+                this.ball.ballPos.y += this.ball.ballVel.y -= 2
+            }
+    },
+    
+
+
+        // if (this.ball.ballPos.x + this.ball.radius > this.canvasSize.w || this.ball.ballPos.x - this.ball.radius < 0) {
+        //     this.ball.dx = -this.ball.dx;
+
+        // if (this.ball.ballPos.y - this.ball.radius < 0) {
+        //         this.ball.dy = + this.ball.dy
+        // }
+        //if(this.ball.ballPos.x + this.ball.radius > this.canvasSize.w || this.ball.ballPos.x - this.ball.radius < 0){
+           // this.ball.dx = - this.ball.dx;
+      
+  
+    
+    
 
    
     
@@ -113,7 +118,7 @@ const Game = {
     },
 
     drawPaddle(name) {
-        this.paddle = new Paddle(this.ctx, name, 350, 700, 150, 30, 600, this.canvasSize)
+        this.paddle = new Paddle(this.ctx, name, 350, 700, 150, 30, 600, 5, this.canvasSize)
         // this.paddle.init()
         console.log(this.paddle)
     },

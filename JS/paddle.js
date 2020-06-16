@@ -7,8 +7,8 @@ class Paddle {
         this.paddleH = 30
         this.paddleVel = { x: 40, y: 10}
         this.canvasSize = canvasSize
+        this.dx = 5
         this.paddle = undefined
-
         this.paddle = new Image()
         this.paddle.src = name
     }
