@@ -47,7 +47,6 @@ const Game = {
         setInterval(() => {
             this.clearScreen()
             this.ball.move()
-            this.obstacles.createObstacles()
             this.drawAll()
             this.paddleObstacle()
             this.wallObstacle()
@@ -67,6 +66,11 @@ const Game = {
         this.ball.ballPos.x > this.canvasSize.w - this.ball.ballSize.w ? this.ball.ballVel.x *= -1 : null
         this.ball.ballPos.y + this.ball.ballSize.h < 0 ? this.ball.ballVel.y *= -1 : null
         this.ball.ballPos.x + this.ball.ballSize.w < 0 ? this.ball.ballVel.x *= -1 : null
+
+        // this.ball.ballPos.y > this.canvasSize.h - this.ball.ballSize ? this.ball.ballVel.y *= -1 : null
+        // this.ball.ballPos.x > this.canvasSize.w - this.ball.ballSize? this.ball.ballVel.x *= -1 : null
+        // this.ball.ballPos.y + this.ball.ballSize < 0 ? this.ball.ballVel.y *= -1 : null
+        // this.ball.ballPos.x + this.ball.ballSize < 0 ? this.ball.ballVel.x *= -1 : null
     },
     
             
@@ -78,19 +82,22 @@ const Game = {
             this.ball.ballPos.y > this.paddle.posY) {
                 this.ball.ballPos.x += this.ball.ballVel.x *= -1
                 this.ball.ballPos.y += this.ball.ballVel.y *= -1
-            }
+       }
+        
+        // if {this.paddle.paddleW}
     },
 
     reset() {
         this.drawBall('../img/marble.png') 
         this.drawPaddle('../img/BluePaddle.png')
-        this.obstacles = new Obstacle (this.ctx, 100, 100, 80, 40, this.canvasSize)
+        this.obstacles = new Obstacles (this.ctx, '' ,300, 400, 80, 40, this.canvasSize)
     },
 
     drawAll() {
         this.paddle.createPaddle()
         this.ball.createBall()
-        this.drawObstacles()
+        // this.drawObstacles()
+        this.obstacles.createObstacles()
     },
     
 

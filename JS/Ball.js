@@ -6,8 +6,10 @@ class Ball {
 
         this.ballSize = { w: 40, h: 40 }
         this.ballPos = { x: 600, y: 10}
+        //this.ballSize = this.ctx.arc(this.ballPos.x, this.ballPos.y, this.radius, 0, Math.PI*2)    
         this.ballVel = { x: 10, y: 10}
-        this.radius = this.ballSize.w / 2
+         this.radius = this.ballSize.w / 2
+        //this.radius = 20
         // this.dx = 3
         // this.dy = -3
         this.ball = new Image()

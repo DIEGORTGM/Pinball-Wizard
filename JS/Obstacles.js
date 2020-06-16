@@ -1,4 +1,4 @@
-class obstacles {
+class Obstacles {
     constructor(ctx, name, posX, posY, obsW, obsH, canvasSize) {
         this.ctx = ctx
         this.obs = undefined
@@ -21,8 +21,8 @@ class obstacles {
         
     createObstacles() {
         //this.ctx.drawImage(this.obstacle, this.obsX, this.obsY, this.obsW, this.obsH)
-        this.ctx.fillstyle = "green"
-        this.ctx.fillRect(this.posX, this.posY, this.obsW, this.obsH)
+        this.ctx.fillStyle = "green"
+        this.ctx.fillRect(this.obsX, this.obsY, this.obsW, this.obsH)
     }
 
 
