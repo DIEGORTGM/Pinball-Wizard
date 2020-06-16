@@ -49,6 +49,7 @@ const Game = {
             this.paddle.createPaddle()
             this.ball.createBall()
             this.ball.move()
+            this.paddleObstacle()
             this.wallObstacle()
         }, 1000/this.FPS)
     },
@@ -61,35 +62,58 @@ const Game = {
         }
     },
     
+    paddleObstacle() {
+        // (this.ball.ballPos.x > (this.paddle.posX - this.ball.radius - this.paddle.paddleW / 2)) &&
+        // (this.ball.ballPos.x < (this.paddle.posX + this.ball.radius + this.paddle.paddleW / 2)) &&
+        // (this.ball.ballPos.y < this.paddle.posY) &&
+        // (this.ball.ballPosy > (this.paddle.posY - this.ball.radius - this.paddle.paddleH / 2)) 
+        // //alert('yay')
+
+       // if (this.ball.ballPos.x < this.paddle.posX + this.paddle.paddleW) {
+        //&& 
+            // this.ball.ballPos.x > this.paddle.posX &&
+            // this.paddle.posY < this.paddle.posY + this.paddle.paddleH &&
+            // this.ball.ballPos.y > this.paddle.posY) {
+               // this.ball.ballPos.x = this.ball.ballVel.x --
+                //this.ball.ballPos.y = this.ball.ballVel.y --
+           // console.log("ya") }
+        
+        
+            //let collidePoint = this.ball.ballPos.x - (this.ball.ballPos.x + this.paddle.paddleW / 2);
+             
+    },
+    
 
     wallObstacle() {
-
         this.ball.ballPos.y > this.canvasSize.h - this.ball.ballSize.h ? this.ball.ballVel.y *= -1 : null
         this.ball.ballPos.x > this.canvasSize.w - this.ball.ballSize.w ? this.ball.ballVel.x *= -1 : null
         this.ball.ballPos.x - this.ball.ballSize.w <= 0 ? this.ball.ballVel.x ++: null
-        this.ball.ballPos.y - this.ball.ballSize.h <= this.canvasSize.h ? this.ball.ballVel.y ++ : null
-
+        this.ball.ballPos.y - this.ball.ballSize.h <= this.canvasSize.h ? this.ball.ballVel.y ++ : null 
     },
-
-    paddleObstacle() {
-        if (this.ball.ballPos.x < this.paddle.posX + this.paddle.paddleW && this.ball.ballPos.x > this.paddle.posX && this.ball.ballPos.y < this.paddle.posY + this.paddle.paddleH && this.ball.ballPos.y > this.paddle.posY) {
-            
-        }
-    },
-    
-    
-    //     function ballPaddleCollision(){
-    // if(ball.x < paddle.x + paddle.width && ball.x > paddle.x && paddle.y < paddle.y + paddle.height && ball.y > paddle.y)
 
    
+    
+//    (ball.position.X > (paddle.position.X - radius - paddle.Width / 2)) &&
+// (ball.position.X < (paddle.position.X + radius + paddle.Width / 2)) &&
+// (ball.position.Y < paddle.position.Y) &&
+// (ball.position.Y > (paddle.position.Y - radius - paddle.Height / 2))
+
+    
+        // if (ball.x < paddle.x + paddle.width && ball.x > paddle.x && paddle.y < paddle.y + paddle.height && ball.y > paddle.y) {
+
+//    // CHECK WHERE THE BALL HIT THE PADDLE
+//    let collidePoint = ball.x - (paddle.x + paddle.width / 2);
+
+//    // NORMALIZE THE VALUES
+//    collidePoint = collidePoint / (paddle.width / 2);
 
     drawBall(name) {
-        this.ball = new Ball(this.ctx, name, 150, 0, 50, 35, this.canvasSize)
+        this.ball = new Ball(this.ctx, name, 150, 0, 40, 40, this.canvasSize)
         
     },
 
     drawPaddle(name) {
-        this.paddle = new Paddle(this.ctx, name, 350, 700, 150, 30, 50, this.canvasSize)
+        this.paddle = new Paddle(this.ctx, name, 350, 700, 150, 30, 600, this.canvasSize)
         // this.paddle.init()
         console.log(this.paddle)
     },

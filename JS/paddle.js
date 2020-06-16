@@ -1,10 +1,10 @@
 class Paddle {
     constructor(ctx, name, posX, posY, paddleW, paddleH, canvasSize) {
         this.ctx = ctx
-        this.posX = posX
-        this.posY = posY
-        this.paddleW = paddleW
-        this.paddleH = paddleH
+        this.posX = 350
+        this.posY = 700
+        this.paddleW = 150
+        this.paddleH = 30
         this.paddleVel = { x: 40, y: 10}
         this.canvasSize = canvasSize
         this.paddle = undefined
@@ -37,50 +37,6 @@ class Paddle {
 
 
 
-// move(dir) {
-//         if(dir === "left"){
-
-//             if (this.posX == 25){
-
-//                 alert("Te has salido de la carretera")
-
-//             }else{
-
-//                 this.posX --
-//                 this.draw()
-//             } 
-
-//         } else if (dir === "right") {
-
-//             if (this.posX == 350){
-
-//                 alert("Te has salido de la carretera")
-
-//             }else{
-
-//                 this.posX ++
-//                 this.draw()
-
-//             }
-//         }
-//     }
-
-    
-// function keyDownHandler(e) {
-//     if (e.key == "Right" || e.key == "ArrowRight") {
-//         rightPressed = true;
-//     } else if (e.key == "Left" || e.key == "ArrowLeft") {
-//         leftPressed = true;
-//     }
-// }
-
-// function keyUpHandler(e) {
-//     if (e.key == "Right" || e.key == "ArrowRight") {
-//         rightPressed = false;
-//     } else if (e.key == "Left" || e.key == "ArrowLeft") {
-//         leftPressed = false;
-//     }
-// }
 
    
 
