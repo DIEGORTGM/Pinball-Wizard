@@ -5,7 +5,7 @@ class Paddle {
         this.posY = 700
         this.paddleW = 150
         this.paddleH = 30
-        this.paddleVel = 100
+        this.paddleVel = 150
         this.canvasSize = canvasSize
         this.dx = 5
         this.paddle = undefined
@@ -22,12 +22,12 @@ class Paddle {
     move(dir) {
   
         if (dir === "left") {
-            this.posX -= 50
+            this.posX -= 70
             this.createPaddle
         }
         
         if (dir === "right") {
-            this.posX += 50
+            this.posX += 70
             this.createPaddle
         }
         
