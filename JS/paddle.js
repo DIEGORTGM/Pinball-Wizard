@@ -2,7 +2,7 @@ class Paddle {
     constructor(ctx, name, canvasSize) {
         this.ctx = ctx
         this.posX = 285
-        this.posY = 650
+        this.posY = 610
         this.paddleW = 150
         this.paddleH = 30
         this.paddleVel = 70

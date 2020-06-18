@@ -14,7 +14,10 @@ const Game = {
     player: undefined,
     obstacles: [],
     interval: undefined,
+    obsRows: 3,
+    obsCol: 3,
     // obstaclesCounter: undefined,
+    score: 0,
     lives: 3,
     canvasSize: {
         w: undefined,
@@ -22,6 +25,7 @@ const Game = {
     },
     ball: undefined,
     paddle: undefined,
+    randomPosition: undefined,
     keys: {
         
         LEFT: 37,
@@ -32,7 +36,6 @@ const Game = {
         this.canvasDom = document.getElementById('myCanvas')
         this.ctx = this.canvasDom.getContext('2d')
         this.setDimensions()
-        // this.livesCounter() = 3
         this.start()
     },
 
@@ -65,7 +68,8 @@ const Game = {
         document.onkeydown = e => {
             e.keyCode === 37 ? this.paddle.move('left') : null
             e.keyCode === 39 ? this.paddle.move('right') : null
-            //e.keyCode === this.keys.SPACE ? this.drawBall() : null
+         
+            
         }
         
     },
@@ -105,40 +109,50 @@ const Game = {
     
 
     obstacleCollision() {
-        for (let i = 0; i < this.obstacles.obsCol; i++) {
-            for(let j = 0; j < this.obstacles.obsRows; j++) {
-                let bricks = this.obstacles[i][j];
-                if (this.ball.ballPos.x > bricks.x &&
-                   this.ball.ballPos.x < bricks.x + this.obstacles.obsW && 
-                   this.ball.ballPos.y > bricks.y - this.obstacles.obsH &&
-                   this.ball.ballPos.y < bricks.y + this.obstacles.obsH) {
-                        this.ball.ballVel.y = - this.ball.ballVel.y 
-                        this.ball.ballVel.x = + this.ball.ballVel.x 
-                   }
+        for (let i = 0; i < this.obsCol; i++) {
+            for (let j = 0; j < this.obsRows; j++) {
+                let obstacle = this.obstacles[i][j];
+                if (this.ball.ballPos.x > obstacle.obsX &&
+                    this.ball.ballPos.x < obstacle.obsX + obstacle.obsW &&
+                    this.ball.ballPos.y > obstacle.obsY - obstacle.obsH &&
+                    this.ball.ballPos.y < obstacle.obsY + obstacle.obsH) {
+                    this.score++
+                    this.ball.ballVel.y = - this.ball.ballVel.y
+                    //this.ball.ballVel.x = + this.ball.ballVel.x
+                }
+                
             }
         }
-
     },
 
     reset() {
         this.drawBall()
-        this.drawPaddle('../img/BluePaddle.png')
-        this.drawObstacles()
-        this.obstacles = new Obstacles(this.ctx, '', this.obsX, this.obsY, this.obsW, this.obsH, this.canvasSize)
+        this.ball.generateRandomPosition()
+        this.drawPaddle('./img/BluePaddle.png')
+        this.obstacles = []
+        for (let i = 0; i < this.obsRows; i++) {
+            this.obstacles[i] = [];
+            for (let j = 0; j < this.obsCol; j++) {
+                let obstacle = new Obstacles(this.ctx, this.canvasSize);
+                let posX = (i * (obstacle.obsW + obstacle.obsPadding)) + obstacle.obsOffsetLeft
+                let posY = (j * (obstacle.obsH + obstacle.obsPadding)) + obstacle.obsOffsetTop
+                obstacle.setPosition(posX, posY)
+                this.obstacles[i].push(obstacle)
+            }
+        }
     },
 
     drawAll() {
         this.ball.createBall()
         this.paddle.createPaddle()
-        this.obstacles.createObstacles()
         this.drawObstacles()
         this.drawLives()
+        this.drawScore()
     },
 
     drawBall() {
-        this.ball = new Ball(this.ctx, this.canvasSize)
-        //this.ball.generateRandomPosition()
-        
+        this.randomPosition = Math.floor(Math.random() * this.canvasSize.w)
+        this.ball = new Ball(this.ctx, this.randomPosition, this.canvasSize)
     },
 
     drawPaddle(name) {
@@ -146,28 +160,36 @@ const Game = {
     },
 
     drawObstacles() {
-        // console.log("QUE ES",this.obstacles)
-        for (let i = 0; i < 3; i++) {
-            this.obstacles[i] = [];
-            for (let j = 0; j < 3; j++){
-                this.obstacles[i][j] = { x: 0, y: 0};
+        for (let i = 0; i < this.obsRows; i++) {
+            for (let j = 0; j < this.obsCol; j++) {
+                this.obstacles[i][j].draw();
             }
-        }
-        for (let i = 0; i < this.obstacles.obsCol; i++) {
-            for (let j = 0; j < this.obstacles.obsRows; j++) {
-                let obstaclesX = (i * (this.obstacles.obsW + this.obstacles.obsPadding)) + this.obstacles.obsOffsetLeft
-                let obstaclesY = (j * (this.obstacles.obsH + this.obstacles.obsPadding)) + this.obstacles.obsOffsetTop
-                this.obstacles[i][j].x = obstaclesX
-                this.obstacles[i][j].y = obstaclesY
-                this.ctx.beginPath();
-                this.ctx.rect(obstaclesX, obstaclesY, this.obstacles.obsW, this.obstacles.obsH);
-                this.ctx.fillstyle = "#0000FF";
-                this.ctx.fill();
-                this.ctx.closePath()
-            }
-
         }
     },
+
+    // drawObstacles() {
+    //     // console.log("QUE ES",this.obstacles)
+    //     for (let i = 0; i < 3; i++) {
+    //         this.obstacles[i] = [];
+    //         for (let j = 0; j < 3; j++){
+    //             this.obstacles[i][j] = { x: 0, y: 0};
+    //         }
+    //     }
+    //     for (let i = 0; i < this.obstacles.obsCol; i++) {
+    //         for (let j = 0; j < this.obstacles.obsRows; j++) {
+    //             let obstaclesX = (i * (this.obstacles.obsW + this.obstacles.obsPadding)) + this.obstacles.obsOffsetLeft
+    //             let obstaclesY = (j * (this.obstacles.obsH + this.obstacles.obsPadding)) + this.obstacles.obsOffsetTop
+    //             this.obstacles[i][j].x = obstaclesX
+    //             this.obstacles[i][j].y = obstaclesY
+    //             this.ctx.beginPath();
+    //             this.ctx.rect(obstaclesX, obstaclesY, this.obstacles.obsW, this.obstacles.obsH);
+    //             this.ctx.fillstyle = "#0000FF";
+    //             this.ctx.fill();
+    //             this.ctx.closePath()
+    //         }
+
+    //     }
+    // },
         
     drawLives() {
         this.ctx.font = "20px Helvetica"
@@ -175,7 +197,12 @@ const Game = {
         this.ctx.fillText("Lives: " + this.lives, 600, 30);
     
     },
-
+    
+    drawScore(){
+        this.ctx.font = "20px Helvetica"
+        this.ctx.fillStyle = "white"
+        this.ctx.fillText("Score: " + this.score, 450, 30);
+    },
 
 
     clearScreen() {
@@ -185,7 +212,9 @@ const Game = {
 
     gameOver() {
         clearInterval(this.interval)
-    }
+    },
+
+    
 
 }
 

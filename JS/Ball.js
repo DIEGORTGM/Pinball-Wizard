@@ -1,11 +1,11 @@
 class Ball {
-    constructor(ctx, canvasSize) {
+    constructor(ctx, randomPosition, canvasSize) {
         this.ctx = ctx
         this.canvasSize = canvasSize
         this.ball = undefined
 
         this.ballSize = { w: 20, h: 20 }
-        this.ballPos = { x: 285, y: 10}    
+        this.ballPos = { x: randomPosition, y: 10}    
         this.ballVel = { x: 6, y: 6} 
         this.radius = 20
         this.randomPosition = undefined
@@ -31,7 +31,8 @@ class Ball {
     } 
 
     generateRandomPosition() {
-        this.randomPosition = Math.floor(Math.random() * this.ballPos.x.length)
+        this.randomPosition = Math.floor(Math.random() * this.canvasSize.w)
+        console.log(this.randomPosition)
     }
        
 }

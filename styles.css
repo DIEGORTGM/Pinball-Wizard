@@ -17,7 +17,6 @@
 /* Info Box */
 
 .info {
-    /* background-color: aqua; */
     color: white;
     font-size: 18px;
     display: block;
@@ -36,10 +35,14 @@
     margin-left: 20px;
 }
 
+.question {
+    font-size: 30px;
+    margin-top: 70px;
+    justify-content: center;
+}
 /* Controls Box */
 
 .controls{
-    /* background-color: aqua; */
     color: white;
     font-size: 18px;
     display: block;
