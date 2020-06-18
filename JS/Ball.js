@@ -5,18 +5,19 @@ class Ball {
         this.ball = undefined
 
         this.ballSize = { w: 20, h: 20 }
-        this.ballPos = { x: 600, y: 10}    
-        this.ballVel = { x: 6, y:6} 
+        this.ballPos = { x: 285, y: 10}    
+        this.ballVel = { x: 6, y: 6} 
         this.radius = 20
         this.randomPosition = undefined
+        
         
     }
 
     createBall() {
         this.ctx.beginPath();
         this.ctx.arc(this.ballPos.x + this.ballSize.h / 2, this.ballPos.y + this.ballSize.h / 2, this.ballSize.h / 2, 0, Math.PI * 2)
-        this.ctx.fillStyle = 'red';
-        this.ctx.fill();
+        this.ctx.fillStyle = 'white';
+        this.ctx.fill()
         this.ctx.stroke()
         this.ctx.closePath()    
             

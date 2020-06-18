@@ -137,6 +137,8 @@ const Game = {
 
     drawBall() {
         this.ball = new Ball(this.ctx, this.canvasSize)
+        //this.ball.generateRandomPosition()
+        
     },
 
     drawPaddle(name) {
@@ -144,11 +146,11 @@ const Game = {
     },
 
     drawObstacles() {
-        console.log("QUE ES",this.obstacles)
+        // console.log("QUE ES",this.obstacles)
         for (let i = 0; i < 3; i++) {
             this.obstacles[i] = [];
             for (let j = 0; j < 3; j++){
-                this.obstacles[i][j] = { x: 0, y: 0, status: 1 };
+                this.obstacles[i][j] = { x: 0, y: 0};
             }
         }
         for (let i = 0; i < this.obstacles.obsCol; i++) {

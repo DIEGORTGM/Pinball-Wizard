@@ -23,7 +23,7 @@ class Obstacles {
 
         
     createObstacles() {
-        this.ctx.fillStyle = "purple"
+        this.ctx.fillStyle = "blue"
         this.moveObstacles()
         this.ctx.fillRect(this.obsX, this.obsY, this.obsW, this.obsH)
     }
