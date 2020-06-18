@@ -32,24 +32,29 @@
     padding-top: 30px;
 }
 
-/* Score Box */
+/* Controls Box */
 
-.score {
+.controls{
     background-color: aqua;
     display: block;
     margin-bottom: 600px;
     margin-left: 15px;
-    padding-bottom: 150px;
+    padding-bottom: 75px;
     padding-left: 75px;
     padding-right: 75px;
     height: 100%;
     margin-top: 30px;
 }
 
+.buttons {
+    padding-top: 20px;
+}
+
 /* Canvas */
 
 canvas {
 background-image: url('./img/background.png');
+margin-top: 30px;
 }
 
 

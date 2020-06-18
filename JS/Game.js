@@ -13,8 +13,9 @@ const Game = {
     background: undefined,
     player: undefined,
     obstacles: [],
+    interval: undefined,
     // obstaclesCounter: undefined,
-    //livesCounter: undefined o 0 ???
+    lives: 3,
     canvasSize: {
         w: undefined,
         h: undefined
@@ -22,7 +23,7 @@ const Game = {
     ball: undefined,
     paddle: undefined,
     keys: {
-        SPACE: 32,
+        
         LEFT: 37,
         RIGHT: 39,
     },
@@ -38,7 +39,7 @@ const Game = {
 
     setDimensions() {
         this.canvasSize.w = window.innerWidth / 2
-        this.canvasSize.h = window.innerHeight
+        this.canvasSize.h = window.innerHeight 
         this.canvasDom.setAttribute('width', this.canvasSize.w)
         this.canvasDom.setAttribute('height', this.canvasSize.h)
     },
@@ -46,11 +47,12 @@ const Game = {
     start() {
         this.setEventListeners()
         this.reset()
-        setInterval(() => {
+        this.interval = setInterval(() => {
             this.framesCounter++
             this.clearScreen()
             this.drawAll()
             this.ball.move()
+            // this.obstacles.moveObstacles()
             this.paddleObstacle()
             this.wallObstacle()
             this.obstacleCollision()
@@ -63,15 +65,29 @@ const Game = {
         document.onkeydown = e => {
             e.keyCode === 37 ? this.paddle.move('left') : null
             e.keyCode === 39 ? this.paddle.move('right') : null
-            e.keyCode === this.keys.SPACE ? this.drawBall(name) : null
+            //e.keyCode === this.keys.SPACE ? this.drawBall() : null
         }
+        
     },
+        
+
 
     wallObstacle() {
-        this.ball.ballPos.y > this.canvasSize.h - this.ball.ballSize.h ? this.ball.ballVel.y *= -1 : null
+        //this.ball.ballPos.y > this.canvasSize.h - this.ball.ballSize.h ? this.ball.ballVel.y *= -1 : null 
         this.ball.ballPos.x > this.canvasSize.w - this.ball.ballSize.w ? this.ball.ballVel.x *= -1 : null
         this.ball.ballPos.y + this.ball.ballSize.h/2 < 0 ? this.ball.ballVel.y *= -1 : null
         this.ball.ballPos.x + this.ball.ballSize.w/2 < 0 ? this.ball.ballVel.x *= -1 : null
+
+        if (this.ball.ballPos.y > this.canvasSize.h - this.ball.ballSize.h)  {
+            if (this.lives > 1) { 
+                this.lives--
+                this.reset()  
+            } else  {
+                (this.lives < 1)
+                this.gameOver()
+                alert("GAME OVER")
+            }
+        } 
 
     },
 
@@ -85,17 +101,20 @@ const Game = {
             this.ball.ballVel.x = + this.ball.ballVel.x 
         }
     },
+        
+    
 
     obstacleCollision() {
         for (let i = 0; i < this.obstacles.obsCol; i++) {
             for(let j = 0; j < this.obstacles.obsRows; j++) {
                 let bricks = this.obstacles[i][j];
-                 if (this.ball.ballPos.y + this.ball.ballSize.w/2 > bricks.y && 
-                    this.ball.ballPos.x > bricks.x && 
-                    this.ball.ballPos.x + this.ball.ballSize.w/2 < bricks.x + this.obstacles.obsW) {
-                    this.ball.ballVel.y = - this.ball.ballVel.y 
-                    this.ball.ballVel.x = + this.ball.ballVel.x 
-                }
+                if (this.ball.ballPos.x > bricks.x &&
+                   this.ball.ballPos.x < bricks.x + this.obstacles.obsW && 
+                   this.ball.ballPos.y > bricks.y - this.obstacles.obsH &&
+                   this.ball.ballPos.y < bricks.y + this.obstacles.obsH) {
+                        this.ball.ballVel.y = - this.ball.ballVel.y 
+                        this.ball.ballVel.x = + this.ball.ballVel.x 
+                   }
             }
         }
 
@@ -113,23 +132,23 @@ const Game = {
         this.paddle.createPaddle()
         this.obstacles.createObstacles()
         this.drawObstacles()
+        this.drawLives()
     },
 
-
-
-    drawBall(name) {
-        this.ball = new Ball(this.ctx, name, 150, 0, 40, 40, this.canvasSize)
+    drawBall() {
+        this.ball = new Ball(this.ctx, this.canvasSize)
     },
 
     drawPaddle(name) {
-        this.paddle = new Paddle(this.ctx, name, 350, 700, 150, 30, 600, 5, this.canvasSize)
+        this.paddle = new Paddle(this.ctx, name, this.canvasSize)
     },
 
     drawObstacles() {
-        for (let i = 0; i < 10; i++) {
+        console.log("QUE ES",this.obstacles)
+        for (let i = 0; i < 3; i++) {
             this.obstacles[i] = [];
-            for (let j = 0; j < 5; j++){
-                this.obstacles[i][j] = { x: 0, y: 0 };
+            for (let j = 0; j < 3; j++){
+                this.obstacles[i][j] = { x: 0, y: 0, status: 1 };
             }
         }
         for (let i = 0; i < this.obstacles.obsCol; i++) {
@@ -139,7 +158,7 @@ const Game = {
                 this.obstacles[i][j].x = obstaclesX
                 this.obstacles[i][j].y = obstaclesY
                 this.ctx.beginPath();
-                this.ctx.rect(obstaclesX, obstaclesY, 140, 20);
+                this.ctx.rect(obstaclesX, obstaclesY, this.obstacles.obsW, this.obstacles.obsH);
                 this.ctx.fillstyle = "#0000FF";
                 this.ctx.fill();
                 this.ctx.closePath()
@@ -147,11 +166,23 @@ const Game = {
 
         }
     },
+        
+    drawLives() {
+        this.ctx.font = "20px Helvetica"
+        this.ctx.fillStyle = "white"
+        this.ctx.fillText("Lives: " + this.lives, 600, 30);
+    
+    },
 
 
 
     clearScreen() {
         this.ctx.clearRect(0, 0, this.canvasSize.w, this.canvasSize.h)
+
+    },
+
+    gameOver() {
+        clearInterval(this.interval)
     }
 
 }
