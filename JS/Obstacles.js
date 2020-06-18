@@ -9,8 +9,7 @@ class Obstacles {
         this.obsPadding = 100
         this.obsOffsetTop = 130
         this.obsOffsetLeft = 115
-        //this.obsRows = 3
-        //this.obsCol = 3
+    
         this.obsVel = {x: 5, y: 0}
         this.speed = 2
         
@@ -44,13 +43,13 @@ class Obstacles {
     
     moveObstacles() {
         this.obsX += this.speed
-        if (this.obsX == 50) {
-            this.velY = this.speed * (-1)
+        if (this.obsX + this.obsW < 0) {
+            //this.obsVel.x = this.speed *= -1
             this.obsX += this.speed
         }
-        if (this.obsX == 500) {
-            this.speed = this.speed * (-1)
-            this.obsX += this.speed
+        if (this.obsX > this.canvasSize - this.obsW) {
+            //this.obsVel.x = this.speed *= -1
+            this.obsX += this.speed *= -1
         }
         // console.log('muevete')
         //this.obsy += this.obsVel.y
@@ -62,7 +61,20 @@ class Obstacles {
 }
 
 
-    
+    //     this.ball.ballPos.x > this.canvasSize.w - this.ball.ballSize.w ? this.ball.ballVel.x *= -1 : null
+    //     this.ball.ballPos.x + this.ball.ballSize.w/2 < 0 ? this.ball.ballVel.x *= -1 : null
+
+    //     if (this.ball.ballPos.y > this.canvasSize.h - this.ball.ballSize.h)  {
+    //         if (this.lives > 1) { 
+    //             this.lives--
+    //             this.reset()  
+    //         } else  {
+    //             (this.lives < 1)
+    //             this.gameOver()
+    //             alert("GAME OVER")
+    //         }
+    //     } 
+
 
     
 
