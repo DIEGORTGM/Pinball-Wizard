@@ -25,7 +25,7 @@ class Obstacles {
         this.ctx.fillstyle = "#0000FF";
         this.ctx.fill();
         this.ctx.closePath()
-        this.moveObstacles()
+        // this.moveObstacles()
     }
         
     setPosition(posX, posY) {
@@ -36,44 +36,16 @@ class Obstacles {
 
     createObstacles() {
         this.ctx.fillStyle = "blue"
-        this.moveObstacles()
+        // this.moveObstacles()
         this.ctx.fillRect(this.obsX, this.obsY, this.obsW, this.obsH)
     }
 
     
-    moveObstacles() {
-        this.obsX += this.speed
-        if (this.obsX + this.obsW < 0) {
-            //this.obsVel.x = this.speed *= -1
-            this.obsX += this.speed
-        }
-        if (this.obsX > this.canvasSize - this.obsW) {
-            //this.obsVel.x = this.speed *= -1
-            this.obsX += this.speed *= -1
-        }
-        // console.log('muevete')
-        //this.obsy += this.obsVel.y
-    }
-
-    
-
-
+    // moveObstacles() {
+    //     this.obsX += this.speed
+    // }
 }
 
-
-    //     this.ball.ballPos.x > this.canvasSize.w - this.ball.ballSize.w ? this.ball.ballVel.x *= -1 : null
-    //     this.ball.ballPos.x + this.ball.ballSize.w/2 < 0 ? this.ball.ballVel.x *= -1 : null
-
-    //     if (this.ball.ballPos.y > this.canvasSize.h - this.ball.ballSize.h)  {
-    //         if (this.lives > 1) { 
-    //             this.lives--
-    //             this.reset()  
-    //         } else  {
-    //             (this.lives < 1)
-    //             this.gameOver()
-    //             alert("GAME OVER")
-    //         }
-    //     } 
 
 
     

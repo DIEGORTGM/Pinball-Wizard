@@ -59,6 +59,7 @@ const Game = {
             this.paddleObstacle()
             this.wallObstacle()
             this.obstacleCollision()
+            console.log(this.obstacles)
         }, 1000 / this.FPS)
     },
 
@@ -77,7 +78,6 @@ const Game = {
 
 
     wallObstacle() {
-        //this.ball.ballPos.y > this.canvasSize.h - this.ball.ballSize.h ? this.ball.ballVel.y *= -1 : null 
         this.ball.ballPos.x > this.canvasSize.w - this.ball.ballSize.w ? this.ball.ballVel.x *= -1 : null
         this.ball.ballPos.y + this.ball.ballSize.h/2 < 0 ? this.ball.ballVel.y *= -1 : null
         this.ball.ballPos.x + this.ball.ballSize.w/2 < 0 ? this.ball.ballVel.x *= -1 : null
@@ -94,6 +94,17 @@ const Game = {
         } 
 
     },
+
+    // obstacleWall() {
+    //     this.obstacles.forEach(element => {
+    //         element[0].forEach(cv => {
+    //             if (cv[2].posX + cv[2].obsW >= this.canvasSize.w) {
+    //                 this
+    //             }
+    //         })
+                
+    //     });
+    // },
 
 
     paddleObstacle() {
@@ -138,6 +149,7 @@ const Game = {
                 let posY = (j * (obstacle.obsH + obstacle.obsPadding)) + obstacle.obsOffsetTop
                 obstacle.setPosition(posX, posY)
                 this.obstacles[i].push(obstacle)
+    
             }
         }
     },
@@ -217,6 +229,3 @@ const Game = {
     
 
 }
-
-
-

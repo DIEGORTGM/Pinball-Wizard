@@ -32,7 +32,6 @@ class Ball {
 
     generateRandomPosition() {
         this.randomPosition = Math.floor(Math.random() * this.canvasSize.w)
-        console.log(this.randomPosition)
     }
        
 }
